@@ -1,0 +1,3 @@
+ALTER TABLE morrow.candidates ADD COLUMN availability text NOT NULL DEFAULT '';
+CREATE TABLE morrow.privacy_requests(id uuid PRIMARY KEY DEFAULT gen_random_uuid(),org_id uuid NOT NULL REFERENCES morrow.organizations,candidate_id uuid NOT NULL,kind text NOT NULL CHECK(kind IN ('erasure','correction')),body text NOT NULL,status text NOT NULL DEFAULT 'open' CHECK(status IN ('open','resolved')),created_at timestamptz NOT NULL DEFAULT now(),FOREIGN KEY(org_id,candidate_id) REFERENCES morrow.candidates(org_id,id));
+CREATE TABLE morrow.scorecard_templates(id uuid PRIMARY KEY DEFAULT gen_random_uuid(),org_id uuid NOT NULL REFERENCES morrow.organizations,name text NOT NULL,criteria jsonb NOT NULL,created_at timestamptz NOT NULL DEFAULT now(),UNIQUE(org_id,name));

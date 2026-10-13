@@ -1,0 +1,47 @@
+{
+  "organization": "QA Performance 60e4d9e8",
+  "records": {
+    "jobs": 24,
+    "candidates": 240,
+    "applications": 240
+  },
+  "budget": "Each authenticated API response under 15 seconds; bounded application pages of 50.",
+  "measurements": [
+    {
+      "name": "reference",
+      "ms": 2335,
+      "status": 200
+    },
+    {
+      "name": "24-position list",
+      "ms": 1178,
+      "status": 200
+    },
+    {
+      "name": "applications page 1",
+      "ms": 1171,
+      "status": 200
+    },
+    {
+      "name": "applications page 2",
+      "ms": 950,
+      "status": 200
+    },
+    {
+      "name": "indexed candidate search",
+      "ms": 945,
+      "status": 200
+    },
+    {
+      "name": "cohort analytics",
+      "ms": 3857,
+      "status": 200
+    },
+    {
+      "name": "hiring pulse",
+      "ms": 867,
+      "status": 200
+    }
+  ],
+  "limitations": "Single-client API smoke benchmark including remote Neon latency. Not a concurrent load test or Web Vitals measurement."
+}
