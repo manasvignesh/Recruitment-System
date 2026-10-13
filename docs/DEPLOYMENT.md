@@ -1,5 +1,18 @@
 # Deployment
 
+## Existing Render service
+
+Use build command `npm ci && npm run build` and start command `npm start`. The start script binds to `0.0.0.0` and Next.js uses Render's `PORT` automatically.
+
+Before rebuilding, set these private environment variables in the Render service dashboard:
+
+- `DATABASE_URL`: your Neon connection string.
+- `BETTER_AUTH_SECRET`: a strong random secret, at least 32 characters. Generate one locally with `node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"` and store it only in Render's environment settings.
+- `BETTER_AUTH_URL` and `APP_BASE_URL`: both the service's actual public HTTPS origin, without a trailing slash.
+- `NODE_VERSION`: `22.22.2`, matching the verified local runtime.
+
+The ignored local `.env` is intentionally absent from GitHub. Render must receive its own values before build and runtime. Never use the `.env.example` placeholder secret. Run the migrations against the configured database before serving hiring requests. The supplied development database already has migrations 0001–0007 applied.
+
 The application has not been deployed to a public host. Deploy the Next.js Node server to a host supporting Node.js 22, private environment variables, PostgreSQL connectivity, and the document parser packages. Vercel or a container-based Node deployment is possible; no hosting account or DNS action has been performed.
 
 1. Provision a production database/branch separately from the demonstration and QA data. Take a backup and inspect before migration.
